@@ -1,24 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
+//TODO Esta es mi página clúster que va a aglutinar a los hijos
+// 1. Importamos los hijos (FoodBox, ...) Importante checkear que se importan cuando creamos nuevos
+import React, { useState } from 'react'
+import FoodBox from './components/FoodBox';
+import AddFood from './components/AddFood';
 import './App.css';
 
+//Importamos el JSON y lo pasamos por una variable para poder usarlo
+import foods from "./foods.json"
+const foodsArr = foods;
+
+
+
 function App() {
+  const [ foods, setFoods ] = useState(foodsArr)
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <h1>Lista de comidas</h1>
+
+    <button>Add New Foods</button>
+
+    <AddFood />
+
+    {
+      foods.map((eachFood) => {
+        return (
+          <FoodBox propFood={eachFood}/>
+        )
+      })
+    }
+      
     </div>
   );
 }
